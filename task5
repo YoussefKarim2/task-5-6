@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "How many dark and light disks do you want on each side? ";
+    cin >> n;
+
+    int totalDisks = 2 * n;
+    char* disks = new char[totalDisks];
+
+    for (int i = 0; i < totalDisks; i++) {
+        if (i % 2 == 0) {
+            disks[i] = 'D';
+        } else {
+            disks[i] = 'L';
+        }
+    }
+
+    int totalMoves = 0;
+
+    for (int pass = 0; pass < n; pass++) {
+        for (int i = 0; i < totalDisks - 1; i++) {
+            if (disks[i] == 'D' && disks[i + 1] == 'L') {
+                char temp = disks[i];
+                disks[i] = disks[i + 1];
+                disks[i + 1] = temp;
+                totalMoves++;
+            }
+        }
+    }
+
+    cout << "The disks have been sorted:\n";
+    for (int i = 0; i < totalDisks; i++) {
+        cout << disks[i] << " ";
+    }
+
+    cout << "\nTotal number of moves it took: " << totalMoves << endl;
+
+    delete[] disks;
+
+    return 0;
+}
